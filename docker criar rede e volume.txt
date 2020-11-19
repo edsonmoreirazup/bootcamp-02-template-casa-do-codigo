@@ -1,0 +1,2 @@
+docker network create --driver=bridge mysql_casadocodigo_net
+docker volume create mysql_casadocodigo

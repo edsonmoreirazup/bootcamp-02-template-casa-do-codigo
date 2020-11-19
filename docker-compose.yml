@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+
+  mysql:
+    image: mysql:8.0.22
+    container_name: mysql_casadocodigo
+    environment:
+      MYSQL_ROOT_PASSWORD: MySql2020@
+      MYSQL_DATABASE: casadocodigo
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_casadocodigovarlibmysql
+    networks:
+      - mysql_casadocodigo_net
+
+volumes:
+  mysql_casadocodigo:
+    external: true
+
+networks:
+  mysql_casadocodigo_net:
+    external: true
