@@ -12,10 +12,11 @@
     <artifactId>casadocodigo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>casadocodigo</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Projeto casa_do_codigo feito no treinamento do bootcamp#2</description>
 
     <properties>
         <java.version>11</java.version>
+        <flyway.version>7.2.1</flyway.version>
     </properties>
 
     <dependencies>
@@ -46,11 +47,27 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>${flyway.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
