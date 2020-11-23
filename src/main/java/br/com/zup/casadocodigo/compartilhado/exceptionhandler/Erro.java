@@ -83,7 +83,7 @@ public class Erro {
             return this;
         }
 
-        public ErroBuilder withUserMessage(List<Object> objects) {
+        public ErroBuilder withObjects(List<Object> objects) {
             this.objects = objects;
             return this;
         }

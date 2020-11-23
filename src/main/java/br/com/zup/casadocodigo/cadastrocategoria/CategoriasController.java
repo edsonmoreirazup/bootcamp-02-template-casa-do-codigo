@@ -1,6 +1,6 @@
 package br.com.zup.casadocodigo.cadastrocategoria;
 
-import br.com.zup.casadocodigo.compartilhado.exceptionhandler.DomainException;
+import br.com.zup.casadocodigo.compartilhado.exceptionhandler.NegocioException;
 import br.com.zup.casadocodigo.compartilhado.ResourceUriHelper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,7 +38,7 @@ public class CategoriasController {
     @GetMapping("/{categoriaId}")
     public CategoriaResponse buscaPorId(@PathVariable Long categoriaId) {
         CategoriaEntity categoriaEntity = categoriaRepository.findById(categoriaId).orElseThrow(() ->
-                new DomainException(String.format(CATEGORIA_NAO_ENCONTRADA_MSG, categoriaId)));
+                new NegocioException(String.format(CATEGORIA_NAO_ENCONTRADA_MSG, categoriaId)));
 
         return categoriaResponseAssembler.toModel(categoriaEntity);
     }
