@@ -11,7 +11,7 @@ public class CidadeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long cidadeId;
+    private Long cidadeId;
     private @NotBlank String nome;
     @ManyToOne
     private @NotNull @Valid EstadoEntity estado;

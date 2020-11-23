@@ -9,7 +9,7 @@ public class PaisEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int paisId;
+    private Integer paisId;
     private @NotBlank String nome;
 
     @Deprecated

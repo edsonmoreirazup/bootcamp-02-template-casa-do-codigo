@@ -12,7 +12,7 @@ public class AutorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long autorId;
+    private Long autorId;
     private @NotBlank String nome;
     private @NotBlank @Email String email;
     private @NotBlank @Size(max = 400) String descricao;

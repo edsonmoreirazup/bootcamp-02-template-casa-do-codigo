@@ -17,8 +17,8 @@ public class PedidoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long pedidoId;
-    @OneToOne
+    private Long pedidoId;
+    @OneToOne(optional = false)
     private @NotNull @Valid CompraEntity compra;
 
     @ElementCollection

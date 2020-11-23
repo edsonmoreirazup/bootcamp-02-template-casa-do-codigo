@@ -11,7 +11,7 @@ public class EstadoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int estadoId;
+    private Integer estadoId;
     private @NotBlank String nome;
     @ManyToOne
     private @NotNull @Valid PaisEntity pais;

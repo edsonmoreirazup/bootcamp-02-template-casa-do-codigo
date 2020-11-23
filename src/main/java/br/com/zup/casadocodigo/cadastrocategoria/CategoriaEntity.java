@@ -9,7 +9,7 @@ public class CategoriaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long categoriaId;
+    private Long categoriaId;
     private @NotBlank String nome;
 
     @Deprecated
@@ -19,6 +19,10 @@ public class CategoriaEntity {
 
     public CategoriaEntity(@NotBlank String nome) {
         this.nome = nome;
+    }
+
+    public Long getCategoriaId() {
+        return categoriaId;
     }
 
     public String getNome() {
