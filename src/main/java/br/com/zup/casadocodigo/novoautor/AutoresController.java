@@ -15,8 +15,8 @@ import javax.validation.Valid;
 @RequestMapping(path = "/autores" , produces = MediaType.APPLICATION_JSON_VALUE)
 public class AutoresController {
 
-    private AutorRepository autorRepository;
-    private AutorResponseAssembler autorResponseAssembler;
+    private final AutorRepository autorRepository;
+    private final AutorResponseAssembler autorResponseAssembler;
     private static final String AUTOR_NAO_ENCONTRADO_ID_MSG = "Não existe um cadastro de autor com código %d";
     private static final String AUTOR_NAO_ENCONTRADO_EMAIL_MSG = "Não existe um cadastro de autor com email %s";
 
@@ -27,9 +27,9 @@ public class AutoresController {
 
     @Transactional
     @ResponseStatus(HttpStatus.OK)
-    public AutorResponse create(@RequestBody @Valid AutorRequest request) {
+    public AutorResponse cria(@RequestBody @Valid AutorRequest request) {
 
-        AutorEntity novoAutor = new AutorEntity(request.getNome(),request.getEmail(), request.getDescricao());
+        AutorEntity novoAutor = new AutorEntity(request.getNome(),request.getEmail(), request.getDescricao(), request.getLivros());
         autorRepository.save(novoAutor);
 
         AutorResponse autorResponse = autorResponseAssembler.toModel(novoAutor);

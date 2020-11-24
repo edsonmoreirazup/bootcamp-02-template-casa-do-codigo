@@ -1,10 +1,13 @@
 package br.com.zup.casadocodigo.novoautor;
 
+import br.com.zup.casadocodigo.cadastrolivro.LivroEntity;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,15 +21,19 @@ public class AutorEntity {
     private @NotBlank @Size(max = 400) String descricao;
     private LocalDateTime dataRegistro = LocalDateTime.now();
 
+    @ManyToMany(mappedBy = "autores")
+    private List<LivroEntity> livros;
+
     @Deprecated
     public AutorEntity() {
 
     }
 
-    public AutorEntity(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao) {
+    public AutorEntity(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao, List<LivroEntity> livros) {
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;
+        this.livros = livros;
     }
 
     public long getAutorId() {

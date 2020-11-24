@@ -24,7 +24,7 @@ public class CategoriasController {
 
     @Transactional
     @ResponseStatus(HttpStatus.OK)
-    public CategoriaResponse create(@RequestBody @Valid CategoriaRequest request) {
+    public CategoriaResponse cria(@RequestBody @Valid CategoriaRequest request) {
 
         CategoriaEntity novaCategoria = new CategoriaEntity(request.getNome());
         categoriaRepository.save(novaCategoria);

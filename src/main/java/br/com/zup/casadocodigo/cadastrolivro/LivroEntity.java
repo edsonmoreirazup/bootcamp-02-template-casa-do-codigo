@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,8 +22,13 @@ public class LivroEntity {
     private @NotNull @Positive BigDecimal preco;
     private @Min(100) int nrPaginas;
     private @NotNull @Future LocalDate dataPublicacao;
-    @ManyToOne
-    private @NotNull @Valid AutorEntity autor;
+
+    @ManyToMany
+    @JoinTable(name = "autor_livro",
+            joinColumns = @JoinColumn(name = "autor_id"),
+            inverseJoinColumns = @JoinColumn(name = "livro_isbn"))
+    private @NotNull @Valid List<AutorEntity> autores;
+
     @ManyToOne
     private @NotNull @Valid CategoriaEntity categoria;
 
@@ -31,7 +37,7 @@ public class LivroEntity {
 
     }
 
-    public LivroEntity(@NotBlank String livroIsbn, @NotBlank String titulo, @NotBlank String resumo, @NotBlank String sumario, @NotNull @Positive BigDecimal preco, @Min(100) int nrPaginas, @NotNull @Future LocalDate dataPublicacao, @NotNull @Valid AutorEntity autor, @NotNull @Valid CategoriaEntity categoria) {
+    public LivroEntity(@NotBlank String livroIsbn, @NotBlank String titulo, @NotBlank String resumo, @NotBlank String sumario, @NotNull @Positive BigDecimal preco, @Min(100) int nrPaginas, @NotNull @Future LocalDate dataPublicacao, @NotNull @Valid List<AutorEntity> autores, @NotNull @Valid CategoriaEntity categoria) {
         this.livroIsbn = livroIsbn;
         this.titulo = titulo;
         this.resumo = resumo;
@@ -39,7 +45,7 @@ public class LivroEntity {
         this.preco = preco;
         this.nrPaginas = nrPaginas;
         this.dataPublicacao = dataPublicacao;
-        this.autor = autor;
+        this.autores = autores;
         this.categoria = categoria;
     }
 
@@ -76,9 +82,8 @@ public class LivroEntity {
         return dataPublicacao;
     }
 
-    public AutorEntity getAutor() {
-
-        return autor;
+    public List<AutorEntity> getAutores() {
+        return autores;
     }
 
     public CategoriaEntity getCategoria() {
@@ -109,7 +114,7 @@ public class LivroEntity {
                 ", preco=" + preco +
                 ", nrPaginas=" + nrPaginas +
                 ", dataPublicacao=" + dataPublicacao +
-                ", autor=" + autor +
+                ", autores=" + autores +
                 ", categoria=" + categoria +
                 '}';
     }
