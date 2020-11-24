@@ -1,8 +1,9 @@
 package br.com.zup.casadocodigo.novoautor;
 
-import br.com.zup.casadocodigo.cadastrocategoria.*;
 import br.com.zup.casadocodigo.compartilhado.ResourceUriHelper;
 import br.com.zup.casadocodigo.compartilhado.exceptionhandler.EntidadeNaoEncontradaException;
+import br.com.zup.casadocodigo.novoautor.request.AutorEmailRequest;
+import br.com.zup.casadocodigo.novoautor.request.AutorRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,8 @@ public class AutoresController {
 
     private AutorRepository autorRepository;
     private AutorResponseAssembler autorResponseAssembler;
-    private static final String AUTOR_NAO_ENCONTRADA_MSG = "Não existe um cadastro de autor com código %d";
+    private static final String AUTOR_NAO_ENCONTRADO_ID_MSG = "Não existe um cadastro de autor com código %d";
+    private static final String AUTOR_NAO_ENCONTRADO_EMAIL_MSG = "Não existe um cadastro de autor com email %s";
 
     public AutoresController(AutorRepository autorRepository, AutorResponseAssembler autorResponseAssembler) {
         this.autorRepository = autorRepository;
@@ -38,9 +40,17 @@ public class AutoresController {
 
     @GetMapping("/{autorId}")
     public AutorResponse buscaPorId(@PathVariable Long autorId) {
-        AutorEntity categoriaEntity = autorRepository.findById(autorId).orElseThrow(() ->
-                new EntidadeNaoEncontradaException(String.format(AUTOR_NAO_ENCONTRADA_MSG, autorId)));
+        AutorEntity autorEntity = autorRepository.findById(autorId).orElseThrow(() ->
+                new EntidadeNaoEncontradaException(String.format(AUTOR_NAO_ENCONTRADO_ID_MSG, autorId)));
 
-        return autorResponseAssembler.toModel(categoriaEntity);
+        return autorResponseAssembler.toModel(autorEntity);
+    }
+
+    @GetMapping
+    public AutorResponse buscaPorEmail(@RequestBody @Valid AutorEmailRequest request) {
+        AutorEntity autorEntity = autorRepository.findByEmail(request.getEmail()).orElseThrow(() ->
+                new EntidadeNaoEncontradaException(String.format(AUTOR_NAO_ENCONTRADO_EMAIL_MSG, request.getEmail())));
+
+        return autorResponseAssembler.toModel(autorEntity);
     }
 }

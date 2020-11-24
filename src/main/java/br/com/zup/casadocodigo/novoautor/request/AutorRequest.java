@@ -1,7 +1,8 @@
-package br.com.zup.casadocodigo.novoautor;
+package br.com.zup.casadocodigo.novoautor.request;
 
 import br.com.zup.casadocodigo.cadastrocategoria.CategoriaEntity;
 import br.com.zup.casadocodigo.compartilhado.UniqueValue;
+import br.com.zup.casadocodigo.novoautor.AutorEntity;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -12,7 +13,10 @@ import java.time.LocalDateTime;
 public class AutorRequest {
 
     private @NotBlank String nome;
-    private @NotBlank @Email String email;
+
+    @NotBlank @Email
+    @UniqueValue(domainClass = AutorEntity.class,fieldName = "email")
+    private  String email;
     private @NotBlank @Size(max = 400) String descricao;
     private @NotNull LocalDateTime dataRegistro;
 

@@ -17,13 +17,13 @@ public class AutorResponseAssembler extends RepresentationModelAssemblerSupport<
 
     @Override
     public AutorResponse toModel(AutorEntity categoriaEntity) {
-        AutorResponse categoriasResponse = createModelWithId(categoriaEntity.getAutorId(), categoriaEntity);
-        categoriasResponse.setAutorId(categoriaEntity.getAutorId());
-        categoriasResponse.setAutorId(categoriaEntity.getAutorId());
+        AutorResponse autorResponse = createModelWithId(categoriaEntity.getAutorId(), categoriaEntity);
+        autorResponse.setAutorId(categoriaEntity.getAutorId());
+        autorResponse.setAutorId(categoriaEntity.getAutorId());
 
-        categoriasResponse.add(categoriaLinks.linkToAutores("categorias"));
+        autorResponse.add(categoriaLinks.linkToAutores("autor"));
 
-        return categoriasResponse;
+        return autorResponse;
     }
 
     @Override
