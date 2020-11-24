@@ -41,6 +41,34 @@ public class Erro {
         return new ErroBuilder();
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public OffsetDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public String getUserMessage() {
+        return userMessage;
+    }
+
+    public List<Object> getObjects() {
+        return objects;
+    }
+
     public static class ErroBuilder {
 
         private Integer status;
@@ -110,6 +138,14 @@ public class Erro {
 
         public static ObjectBuilder builder() {
             return new ObjectBuilder();
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getUserMessage() {
+            return userMessage;
         }
 
         public static class ObjectBuilder {

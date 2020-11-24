@@ -23,7 +23,7 @@ public class AutorEntity {
 
     }
 
-    public AutorEntity(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao, LocalDateTime dataRegistro) {
+    public AutorEntity(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao) {
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;

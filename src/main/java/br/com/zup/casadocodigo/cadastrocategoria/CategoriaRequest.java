@@ -10,7 +10,7 @@ public class CategoriaRequest {
     @UniqueValue(domainClass = CategoriaEntity.class, fieldName = "nome")
     private String nome;
 
-    public void setNome(String nome) {
+    public CategoriaRequest(@NotBlank String nome) {
         this.nome = nome;
     }
 

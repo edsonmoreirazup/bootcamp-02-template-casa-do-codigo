@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class CategoriaResponseAssembler extends RepresentationModelAssemblerSupport<CategoriaEntity, CategoriaResponse> {
 
-    @Autowired
-    private CategoriaLinks categoriaLinks;
+    private final CategoriaLinks categoriaLinks;
 
-    public CategoriaResponseAssembler() {
+    public CategoriaResponseAssembler(CategoriaLinks categoriaLinks) {
         super(CategoriasController.class, CategoriaResponse.class);
+        this.categoriaLinks = categoriaLinks;
     }
 
     @Override
