@@ -27,10 +27,10 @@ public class CategoriasController {
     public CategoriaResponse cria(@RequestBody @Valid CategoriaRequest request) {
 
         CategoriaEntity novaCategoria = new CategoriaEntity(request.getNome());
-        categoriaRepository.save(novaCategoria);
+        novaCategoria = categoriaRepository.save(novaCategoria);
 
         CategoriaResponse categoriaResponse = categoriaResponseAssembler.toModel(novaCategoria);
-        ResourceUriHelper.addUriInResponseHeader(categoriaResponse.getCategoriaId());
+        ResourceUriHelper.addUriInResponseHeader(novaCategoria.getCategoriaId());
 
         return categoriaResponse;
     }

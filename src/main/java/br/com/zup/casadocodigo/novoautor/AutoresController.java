@@ -30,10 +30,10 @@ public class AutoresController {
     public AutorResponse cria(@RequestBody @Valid AutorRequest request) {
 
         AutorEntity novoAutor = new AutorEntity(request.getNome(),request.getEmail(), request.getDescricao(), request.getLivros());
-        autorRepository.save(novoAutor);
+        novoAutor = autorRepository.save(novoAutor);
 
         AutorResponse autorResponse = autorResponseAssembler.toModel(novoAutor);
-        ResourceUriHelper.addUriInResponseHeader(autorResponse.getAutorId());
+        ResourceUriHelper.addUriInResponseHeader(novoAutor.getAutorId());
 
         return autorResponse;
     }

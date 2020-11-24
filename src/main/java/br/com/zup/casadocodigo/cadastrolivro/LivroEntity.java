@@ -17,9 +17,9 @@ public class LivroEntity {
     @Id
     private @NotBlank String livroIsbn;
     private @NotBlank String titulo;
-    private @NotBlank String resumo;
-    private @NotBlank String sumario;
-    private @NotNull @Positive BigDecimal preco;
+    private @NotBlank @Max(500) String resumo;
+    private @NotBlank @Max(500) String sumario;
+    private @NotNull @Positive @Min(20) BigDecimal preco;
     private @Min(100) int nrPaginas;
     private @NotNull @Future LocalDate dataPublicacao;
 
@@ -27,7 +27,7 @@ public class LivroEntity {
     @JoinTable(name = "autor_livro",
             joinColumns = @JoinColumn(name = "autor_id"),
             inverseJoinColumns = @JoinColumn(name = "livro_isbn"))
-    private @NotNull @Valid List<AutorEntity> autores;
+    private @NotNull List<@NotNull @Valid AutorEntity> autores;
 
     @ManyToOne
     private @NotNull @Valid CategoriaEntity categoria;
@@ -37,7 +37,10 @@ public class LivroEntity {
 
     }
 
-    public LivroEntity(@NotBlank String livroIsbn, @NotBlank String titulo, @NotBlank String resumo, @NotBlank String sumario, @NotNull @Positive BigDecimal preco, @Min(100) int nrPaginas, @NotNull @Future LocalDate dataPublicacao, @NotNull @Valid List<AutorEntity> autores, @NotNull @Valid CategoriaEntity categoria) {
+    public LivroEntity(@NotBlank String livroIsbn, @NotBlank String titulo, @NotBlank @Max(500) String resumo, @NotBlank @Max(500) String sumario,
+                       @NotNull @Positive @Min(20) BigDecimal preco, @Min(100) int nrPaginas, @NotNull @Future LocalDate dataPublicacao,
+                       @NotNull List<@NotNull @Valid AutorEntity> autores, @NotNull @Valid CategoriaEntity categoria) {
+
         this.livroIsbn = livroIsbn;
         this.titulo = titulo;
         this.resumo = resumo;
@@ -87,7 +90,6 @@ public class LivroEntity {
     }
 
     public CategoriaEntity getCategoria() {
-
         return categoria;
     }
 

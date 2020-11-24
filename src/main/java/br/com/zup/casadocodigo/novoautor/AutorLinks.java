@@ -10,13 +10,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 public class AutorLinks {
 
-    public Link linkToAutor(Long categoriaId, String rel) {
+    public Link linkToAutor(Long autorId, String rel) {
         return linkTo(methodOn(AutoresController.class)
-                .buscaPorId(categoriaId)).withRel(rel);
+                .buscaPorId(autorId)).withRel(rel);
     }
 
-    public Link linkToAutor(Long categoriaId) {
-        return linkToAutor(categoriaId, IanaLinkRelations.SELF.value());
+    public Link linkToAutor(Long autorId) {
+        return linkToAutor(autorId, IanaLinkRelations.SELF.value());
     }
 
     public Link linkToAutores(String rel) {

@@ -18,8 +18,7 @@ public class CategoriaResponseAssembler extends RepresentationModelAssemblerSupp
     @Override
     public CategoriaResponse toModel(CategoriaEntity categoriaEntity) {
         CategoriaResponse categoriasResponse = createModelWithId(categoriaEntity.getCategoriaId(), categoriaEntity);
-        categoriasResponse.setCategoriaId(categoriaEntity.getCategoriaId());
-        categoriasResponse.setCategoriaId(categoriaEntity.getCategoriaId());
+        categoriasResponse.setNome(categoriaEntity.getNome());
 
         categoriasResponse.add(categoriaLinks.linkToCategorias("categorias"));
 
