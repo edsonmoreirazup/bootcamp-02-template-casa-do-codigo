@@ -30,9 +30,11 @@ public class CompraEntity {
     private @NotBlank String telefone;
     private @NotBlank String cep;
     private @NotNull BigDecimal valorPago;
+    
     @OneToOne(mappedBy = "compra", cascade = CascadeType.PERSIST, optional = false)
     private @NotNull @Valid PedidoEntity pedido;
-    @ManyToOne
+
+    @ManyToOne(optional = false)
     private @NotNull @Valid CidadeEntity cidade;
     @Embedded
     private CupomAplicado cupomAplicado;

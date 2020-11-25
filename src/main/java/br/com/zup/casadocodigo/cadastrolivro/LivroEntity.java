@@ -29,7 +29,7 @@ public class LivroEntity {
             inverseJoinColumns = @JoinColumn(name = "livro_isbn"))
     private @NotNull List<@NotNull @Valid AutorEntity> autores;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private @NotNull @Valid CategoriaEntity categoria;
 
     @Deprecated

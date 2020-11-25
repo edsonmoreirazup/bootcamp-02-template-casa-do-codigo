@@ -14,7 +14,7 @@ import java.util.Objects;
 @Embeddable
 public class CupomAplicado {
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private @NotNull CupomEntity cupom;
     private @Positive @NotNull BigDecimal percentualDescontoMomento;
     private @NotNull @Future LocalDate validadeMomento;

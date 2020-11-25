@@ -12,7 +12,7 @@ public class LivroLinks {
 
     public Link linkToLivro(String livroIsbn, String rel) {
         return linkTo(methodOn(LivrosController.class)
-                .buscaPorId(livroIsbn)).withRel(rel);
+                .buscaPorIsbn(livroIsbn)).withRel(rel);
     }
 
     public Link linkToLivro(String livroIsbn) {

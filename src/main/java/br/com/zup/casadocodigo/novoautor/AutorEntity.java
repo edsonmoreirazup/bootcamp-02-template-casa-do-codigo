@@ -29,11 +29,10 @@ public class AutorEntity {
 
     }
 
-    public AutorEntity(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao, List<LivroEntity> livros) {
+    public AutorEntity(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao) {
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;
-        this.livros = livros;
     }
 
     public long getAutorId() {
@@ -54,6 +53,10 @@ public class AutorEntity {
 
     public LocalDateTime getDataRegistro() {
         return dataRegistro;
+    }
+
+    public void setLivros(List<LivroEntity> livros) {
+        this.livros = livros;
     }
 
     @Override

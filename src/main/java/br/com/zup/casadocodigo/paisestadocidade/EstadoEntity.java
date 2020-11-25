@@ -13,7 +13,7 @@ public class EstadoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer estadoId;
     private @NotBlank String nome;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private @NotNull @Valid PaisEntity pais;
 
     @Deprecated

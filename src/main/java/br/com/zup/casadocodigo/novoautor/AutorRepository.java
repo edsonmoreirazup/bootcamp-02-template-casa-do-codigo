@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface AutorRepository extends JpaRepository<AutorEntity, Long> {
 
     Optional<AutorEntity> findByEmail(String email);
+
+    Optional<AutorEntity> findByNomeAndEmail(String nome, String email);
 }

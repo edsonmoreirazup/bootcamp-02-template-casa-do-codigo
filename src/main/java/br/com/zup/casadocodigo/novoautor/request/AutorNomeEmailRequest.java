@@ -1,6 +1,5 @@
 package br.com.zup.casadocodigo.novoautor.request;
 
-import br.com.zup.casadocodigo.cadastrolivro.LivroEntity;
 import br.com.zup.casadocodigo.cadastrolivro.LivroRequest;
 import br.com.zup.casadocodigo.compartilhado.UniqueValue;
 import br.com.zup.casadocodigo.novoautor.AutorEntity;
@@ -13,24 +12,18 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class AutorRequest {
+public class AutorNomeEmailRequest {
 
     private @NotBlank String nome;
 
     @NotBlank @Email
     @UniqueValue(domainClass = AutorEntity.class,fieldName = "email")
     private  String email;
-    private @NotBlank @Size(max = 400) String descricao;
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-    public AutorRequest(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao) {
+    public AutorNomeEmailRequest(@NotBlank String nome, @NotBlank @Email String email) {
         this.nome = nome;
         this.email = email;
-        this.descricao = descricao;
-    }
-
-    public AutorEntity toModel() {
-        return new AutorEntity(this.nome,this.email,this.descricao);
     }
 
     public String getNome() {
@@ -40,9 +33,4 @@ public class AutorRequest {
     public String getEmail() {
         return email;
     }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
 }

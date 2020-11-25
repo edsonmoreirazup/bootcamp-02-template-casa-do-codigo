@@ -13,7 +13,7 @@ public class CidadeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cidadeId;
     private @NotBlank String nome;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private @NotNull @Valid EstadoEntity estado;
 
     @Deprecated
