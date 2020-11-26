@@ -1,12 +1,9 @@
-package br.com.zup.casadocodigo.detalhelivro;
+package br.com.zup.casadocodigo.detalhelivro.response;
 
-import br.com.zup.casadocodigo.cadastrolivro.LivroResponse;
-import br.com.zup.casadocodigo.novoautor.AutorEntity;
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@Relation(collectionRelation = "autores")
 public class DetalheSiteAutorResponse extends RepresentationModel<DetalheSiteAutorResponse> {
 
     private String nome;

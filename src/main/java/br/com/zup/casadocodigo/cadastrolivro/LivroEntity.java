@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "livro")
 public class LivroEntity {
 
     @Id
@@ -30,6 +31,7 @@ public class LivroEntity {
     private @NotNull List<@NotNull @Valid AutorEntity> autores;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "categoria_id", nullable = false)
     private @NotNull @Valid CategoriaEntity categoria;
 
     @Deprecated

@@ -1,6 +1,5 @@
 package br.com.zup.casadocodigo.cadastrocategoria;
 
-import br.com.zup.casadocodigo.novoautor.AutorEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

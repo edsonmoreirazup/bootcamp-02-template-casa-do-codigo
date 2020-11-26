@@ -12,10 +12,19 @@ import java.time.LocalDateTime;
 @Relation(collectionRelation = "autores")
 public class AutorResponse extends RepresentationModel<AutorResponse> {
 
+    private Long autorId;
     private String nome;
     private String email;
     private String descricao;
     private LocalDateTime dataRegistro;
+
+    public Long getAutorId() {
+        return autorId;
+    }
+
+    public void setAutorId(Long autorId) {
+        this.autorId = autorId;
+    }
 
     public String getNome() {
         return nome;

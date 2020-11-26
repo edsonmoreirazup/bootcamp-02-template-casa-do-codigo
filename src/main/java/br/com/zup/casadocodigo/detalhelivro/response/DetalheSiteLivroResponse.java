@@ -1,8 +1,9 @@
-package br.com.zup.casadocodigo.detalhelivro;
+package br.com.zup.casadocodigo.detalhelivro.response;
 
 import br.com.zup.casadocodigo.cadastrolivro.LivroEntity;
 import br.com.zup.casadocodigo.novoautor.AutorEntity;
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Relation(collectionRelation = "livros")
 public class DetalheSiteLivroResponse extends RepresentationModel<DetalheSiteAutorResponse> {
 
     private List<DetalheSiteAutorResponse> autores;
@@ -20,17 +22,6 @@ public class DetalheSiteLivroResponse extends RepresentationModel<DetalheSiteAut
     private String resumo;
     private String sumario;
     private String dataPublicacao;
-
-    public DetalheSiteLivroResponse(LivroEntity livroEntity) {
-        titulo = livroEntity.getTitulo();
-        setAutores(livroEntity.getAutores());
-        isbn = livroEntity.getLivroIsbn();
-        numeroPaginas = livroEntity.getNrPaginas();
-        preco = livroEntity.getPreco();
-        resumo = livroEntity.getResumo();
-        sumario = livroEntity.getSumario();
-        setDataPublicacao(livroEntity.getDataPublicacao());
-    }
 
     public String getDataPublicacao() {
         return dataPublicacao;
@@ -64,10 +55,8 @@ public class DetalheSiteLivroResponse extends RepresentationModel<DetalheSiteAut
         return sumario;
     }
 
-    public void setAutores(List<AutorEntity> autores) {
-        this.autores = new ArrayList<>();
-        autores.forEach(autor ->
-                this.autores.add(new DetalheSiteAutorResponse(autor.getNome(), autor.getDescricao())));
+    public void setAutores(List<DetalheSiteAutorResponse> autores) {
+        this.autores = autores;
     }
 
     public void setTitulo(String titulo) {

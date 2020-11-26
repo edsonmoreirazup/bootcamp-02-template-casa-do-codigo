@@ -1,25 +1,18 @@
 package br.com.zup.casadocodigo.cadastrolivro;
 
 import br.com.zup.casadocodigo.cadastrocategoria.CategoriaEntity;
-import br.com.zup.casadocodigo.cadastrocategoria.CategoriaRepository;
-import br.com.zup.casadocodigo.cadastrocategoria.CategoriaRequest;
+import br.com.zup.casadocodigo.compartilhado.ExistsId;
 import br.com.zup.casadocodigo.compartilhado.UniqueValue;
 import br.com.zup.casadocodigo.novoautor.AutorEntity;
-import br.com.zup.casadocodigo.novoautor.AutorRepository;
-import br.com.zup.casadocodigo.novoautor.request.AutorNomeEmailRequest;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
 
 public class LivroRequest {
@@ -39,13 +32,15 @@ public class LivroRequest {
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dataPublicacao;
 
-    private @NotNull @Size(min=1) List<@NotNull Long> idAutores;
+    private @NotNull @Size(min=1) List<@NotNull @ExistsId(domainClass = AutorEntity.class, fieldName = "id") Long> idAutores;
     private @NotNull Long idCategoria;
 
     public LivroRequest(@NotBlank String livroIsbn, @NotBlank String titulo, @NotBlank @Max(500) String resumo,
                         @NotBlank @Max(500) String sumario, @NotNull @Positive @Min(20) BigDecimal preco,
                         @NotNull @Positive @Min(100) int nrPaginas, @NotNull @Future LocalDate dataPublicacao,
-                        @NotNull @Size(min = 1) List<@NotNull Long> idAutores, @NotNull Long idCategoria) {
+                        @NotNull @Size(min = 1) List<@NotNull @ExistsId(domainClass = AutorEntity.class, fieldName = "id") Long> idAutores,
+                        @NotNull Long idCategoria) {
+
         this.livroIsbn = livroIsbn;
         this.titulo = titulo;
         this.resumo = resumo;
@@ -106,5 +101,20 @@ public class LivroRequest {
 
     public Long getIdCategoria() {
         return idCategoria;
+    }
+
+    @Override
+    public String toString() {
+        return "LivroRequest{" +
+                "livroIsbn='" + livroIsbn + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", resumo='" + resumo + '\'' +
+                ", sumario='" + sumario + '\'' +
+                ", preco=" + preco +
+                ", nrPaginas=" + nrPaginas +
+                ", dataPublicacao=" + dataPublicacao +
+                ", idAutores=" + idAutores +
+                ", idCategoria=" + idCategoria +
+                '}';
     }
 }

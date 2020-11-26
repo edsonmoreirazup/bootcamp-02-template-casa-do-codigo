@@ -1,17 +1,12 @@
 package br.com.zup.casadocodigo.novoautor.request;
 
-import br.com.zup.casadocodigo.cadastrolivro.LivroEntity;
-import br.com.zup.casadocodigo.cadastrolivro.LivroRequest;
 import br.com.zup.casadocodigo.compartilhado.UniqueValue;
 import br.com.zup.casadocodigo.novoautor.AutorEntity;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
-import java.util.List;
 
 public class AutorRequest {
 
@@ -45,4 +40,12 @@ public class AutorRequest {
         return descricao;
     }
 
+    @Override
+    public String toString() {
+        return "AutorRequest{" +
+                "nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", descricao='" + descricao + '\'' +
+                '}';
+    }
 }

@@ -1,6 +1,5 @@
 package br.com.zup.casadocodigo.cadastrocategoria;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
@@ -16,9 +15,10 @@ public class CategoriaResponseAssembler extends RepresentationModelAssemblerSupp
     }
 
     @Override
-    public CategoriaResponse toModel(CategoriaEntity categoriaEntity) {
-        CategoriaResponse categoriasResponse = createModelWithId(categoriaEntity.getCategoriaId(), categoriaEntity);
-        categoriasResponse.setNome(categoriaEntity.getNome());
+    public CategoriaResponse toModel(CategoriaEntity categoria) {
+        CategoriaResponse categoriasResponse = createModelWithId(categoria.getCategoriaId(), categoria);
+        categoriasResponse.setCategoriaId(categoria.getCategoriaId());
+        categoriasResponse.setNome(categoria.getNome());
 
         categoriasResponse.add(categoriaLinks.linkToCategorias("categorias"));
 

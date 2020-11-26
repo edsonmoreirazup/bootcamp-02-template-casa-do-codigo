@@ -1,16 +1,25 @@
 package br.com.zup.casadocodigo.cadastrocategoria;
 
+import br.com.zup.casadocodigo.cadastrolivro.LivroEntity;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "categoria")
 public class CategoriaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "categoria_id")
     private Long categoriaId;
     private @NotBlank String nome;
+
+    @OneToMany(mappedBy = "categoria")
+    private List<LivroEntity> livros;
 
     @Deprecated
     public CategoriaEntity() {
@@ -27,6 +36,10 @@ public class CategoriaEntity {
 
     public String getNome() {
         return nome;
+    }
+
+    public List<LivroEntity> getLivros() {
+        return livros;
     }
 
     @Override

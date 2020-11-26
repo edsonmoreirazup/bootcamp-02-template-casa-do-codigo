@@ -33,4 +33,12 @@ public class AutorNomeEmailRequest {
     public String getEmail() {
         return email;
     }
+
+    @Override
+    public String toString() {
+        return "AutorNomeEmailRequest{" +
+                "nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

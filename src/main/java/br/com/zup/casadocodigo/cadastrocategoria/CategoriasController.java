@@ -1,13 +1,12 @@
 package br.com.zup.casadocodigo.cadastrocategoria;
 
-import br.com.zup.casadocodigo.compartilhado.exceptionhandler.EntidadeNaoEncontradaException;
 import br.com.zup.casadocodigo.compartilhado.ResourceUriHelper;
-import org.springframework.data.web.PageableDefault;
+import br.com.zup.casadocodigo.compartilhado.exceptionhandler.EntidadeNaoEncontradaException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
@@ -40,17 +39,17 @@ public class CategoriasController {
 
     @GetMapping("/{categoriaId}")
     public CategoriaResponse buscaPorId(@PathVariable Long categoriaId) {
-        CategoriaEntity categoriaEntity = categoriaRepository.findById(categoriaId).orElseThrow(() ->
+        CategoriaEntity categoria = categoriaRepository.findById(categoriaId).orElseThrow(() ->
                 new EntidadeNaoEncontradaException(String.format(CATEGORIA_NAO_ENCONTRADA_MSG, categoriaId)));
 
-        return categoriaResponseAssembler.toModel(categoriaEntity);
+        return categoriaResponseAssembler.toModel(categoria);
     }
 
     @GetMapping
     public CategoriaResponse buscaPorNome(@RequestBody @Valid CategoriaRequest categoriaRequest) {
-        CategoriaEntity categoriaEntity = categoriaRepository.findByNome(categoriaRequest.getNome()).orElseThrow(() ->
+        CategoriaEntity categoria = categoriaRepository.findByNome(categoriaRequest.getNome()).orElseThrow(() ->
                 new EntidadeNaoEncontradaException(String.format(CATEGORIA_NAO_NOME_MSG, categoriaRequest.getNome())));
 
-        return categoriaResponseAssembler.toModel(categoriaEntity);
+        return categoriaResponseAssembler.toModel(categoria);
     }
 }

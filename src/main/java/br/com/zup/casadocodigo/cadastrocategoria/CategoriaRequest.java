@@ -19,4 +19,11 @@ public class CategoriaRequest {
     public String getNome() {
         return nome;
     }
+
+    @Override
+    public String toString() {
+        return "CategoriaRequest{" +
+                "nome='" + nome + '\'' +
+                '}';
+    }
 }

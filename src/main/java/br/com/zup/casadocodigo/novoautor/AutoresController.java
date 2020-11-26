@@ -49,7 +49,7 @@ public class AutoresController {
         return autorResponseAssembler.toModel(autorEntity);
     }
 
-    @GetMapping
+    @GetMapping(path = "/busca_por_email")
     public AutorResponse buscaPorEmail(@RequestBody @Valid AutorEmailRequest request) {
         AutorEntity autorEntity = autorRepository.findByEmail(request.getEmail()).orElseThrow(() ->
                 new EntidadeNaoEncontradaException(String.format(AUTOR_NAO_ENCONTRADO_EMAIL_MSG, request.getEmail())));
@@ -57,7 +57,7 @@ public class AutoresController {
         return autorResponseAssembler.toModel(autorEntity);
     }
 
-    @GetMapping
+    @GetMapping(path = "/busca_por_nome_email")
     public AutorResponse buscaPorNomeAndEmail(@RequestBody @Valid AutorNomeEmailRequest request) {
         AutorEntity autorEntity = autorRepository.findByNomeAndEmail(request.getNome(), request.getEmail()).orElseThrow(() ->
                 new EntidadeNaoEncontradaException(String.format(AUTOR_NAO_ENCONTRADO_NOME_EMAIL_MSG, request.getNome(), request.getEmail())));

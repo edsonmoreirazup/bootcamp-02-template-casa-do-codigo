@@ -5,12 +5,6 @@ import br.com.zup.casadocodigo.novoautor.AutorEntity;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -25,8 +19,8 @@ public class LivroResponse  extends RepresentationModel<LivroResponse> {
     private BigDecimal preco;
     private int nrPaginas;
     private LocalDate dataPublicacao;
-    private List<AutorEntity> autores;
-    private CategoriaEntity categoria;
+    private List<Long> autores;
+    private Long categoriaId;
 
     public String getLivroIsbn() {
         return livroIsbn;
@@ -84,19 +78,19 @@ public class LivroResponse  extends RepresentationModel<LivroResponse> {
         this.dataPublicacao = dataPublicacao;
     }
 
-    public List<AutorEntity> getAutores() {
+    public List<Long> getAutores() {
         return autores;
     }
 
-    public void setAutores(List<AutorEntity> autores) {
+    public void setAutores(List<Long> autores) {
         this.autores = autores;
     }
 
-    public CategoriaEntity getCategoria() {
-        return categoria;
+    public Long getCategoriaId() {
+        return categoriaId;
     }
 
-    public void setCategoria(CategoriaEntity categoria) {
-        this.categoria = categoria;
+    public void setCategoriaId(Long categoriaId) {
+        this.categoriaId = categoriaId;
     }
 }

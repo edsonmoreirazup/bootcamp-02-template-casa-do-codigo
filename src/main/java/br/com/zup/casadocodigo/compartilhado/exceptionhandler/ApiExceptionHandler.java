@@ -13,7 +13,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -26,6 +25,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.nio.file.AccessDeniedException;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -50,6 +50,22 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NegocioException.class)
     public ResponseEntity<?> handleDomain(NegocioException ex, WebRequest request) {
 
+        return restricaoDeNegocioNaoAtendidada(ex, request);
+    }
+
+    @ExceptionHandler(value = IllegalStateException.class)
+    public ResponseEntity<?> handleIllegalStateException(IllegalStateException ex, WebRequest request) {
+
+        return restricaoDeNegocioNaoAtendidada(ex, request);
+    }
+
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException ex, WebRequest request) {
+
+        return restricaoDeNegocioNaoAtendidada(ex, request);
+    }
+
+    private ResponseEntity<Object> restricaoDeNegocioNaoAtendidada(RuntimeException ex, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         TipoErro tipoErro = TipoErro.ERRO_NEGOCIO;
         String detail = ex.getMessage();

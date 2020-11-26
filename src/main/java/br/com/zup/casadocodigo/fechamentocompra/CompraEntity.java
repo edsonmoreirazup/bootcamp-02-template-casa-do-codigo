@@ -15,6 +15,7 @@ import java.util.UUID;
 import java.util.function.Function;
 
 @Entity
+@Table(name = "compra")
 public class CompraEntity {
 
     @Id
@@ -35,6 +36,7 @@ public class CompraEntity {
     private @NotNull @Valid PedidoEntity pedido;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "cidade_id", nullable = false)
     private @NotNull @Valid CidadeEntity cidade;
     @Embedded
     private CupomAplicado cupomAplicado;

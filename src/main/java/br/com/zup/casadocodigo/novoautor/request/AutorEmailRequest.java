@@ -18,4 +18,11 @@ public class AutorEmailRequest {
     public String getEmail() {
         return email;
     }
+
+    @Override
+    public String toString() {
+        return "AutorEmailRequest{" +
+                "email='" + email + '\'' +
+                '}';
+    }
 }
