@@ -2,6 +2,12 @@ package br.com.zup.casadocodigo.cadastrolivro;
 
 import br.com.zup.casadocodigo.compartilhado.ResourceUriHelper;
 import br.com.zup.casadocodigo.compartilhado.exceptionhandler.EntidadeNaoEncontradaException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +23,23 @@ public class LivrosController {
     private final EntityManager manager;
     private final LivroRepository livroRepository;
     private final LivroResponseAssembler livroResponseAssembler;
+
     private static final String LIVRO_NAO_ENCONTRADO_ID_MSG = "Não existe um cadastro de livro com código %s";
 
-    public LivrosController(LivroRepository livroRepository, LivroResponseAssembler livroResponseAssembler, EntityManager manager) {
+    public LivrosController(EntityManager manager, LivroRepository livroRepository, LivroResponseAssembler livroResponseAssembler) {
+        this.manager = manager;
         this.livroRepository = livroRepository;
         this.livroResponseAssembler = livroResponseAssembler;
-        this.manager = manager;
+    }
+
+    @GetMapping
+    public PagedModel<LivroResponse> listarTodos(@PageableDefault Pageable pageable,
+                                                 PagedResourcesAssembler<LivroEntity> pagedResourcesAssembler) {
+
+        Page<LivroEntity> livrosPage = livroRepository.findAll(pageable);
+
+        return pagedResourcesAssembler
+                .toModel(livrosPage, livroResponseAssembler);
     }
 
     @Transactional

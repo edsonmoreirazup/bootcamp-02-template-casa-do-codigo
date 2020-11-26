@@ -2,6 +2,7 @@ package br.com.zup.casadocodigo.cadastrocategoria;
 
 import br.com.zup.casadocodigo.compartilhado.exceptionhandler.EntidadeNaoEncontradaException;
 import br.com.zup.casadocodigo.compartilhado.ResourceUriHelper;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
