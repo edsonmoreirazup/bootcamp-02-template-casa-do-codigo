@@ -1,6 +1,7 @@
 package br.com.zup.casadocodigo.cadastrolivro;
 
 import br.com.zup.casadocodigo.cadastrocategoria.CategoriaEntity;
+import br.com.zup.casadocodigo.fechamentocompra.PedidoItensEntity;
 import br.com.zup.casadocodigo.novoautor.AutorEntity;
 
 import javax.persistence.*;
@@ -34,15 +35,18 @@ public class LivroEntity {
     @JoinColumn(name = "categoria_id", nullable = false)
     private @NotNull @Valid CategoriaEntity categoria;
 
+    @OneToMany(mappedBy = "livro")
+    private List<PedidoItensEntity> pedidoItens;
+
     @Deprecated
     public LivroEntity() {
 
     }
 
-    public LivroEntity(@NotBlank String livroIsbn, @NotBlank String titulo, @NotBlank @Max(500) String resumo, @NotBlank @Max(500) String sumario,
-                       @NotNull @Positive @Min(20) BigDecimal preco, @Min(100) int nrPaginas, @NotNull @Future LocalDate dataPublicacao,
+    public LivroEntity(@NotBlank String livroIsbn, @NotBlank String titulo, @NotBlank @Max(500) String resumo,
+                       @NotBlank @Max(500) String sumario, @NotNull @Positive @Min(20) BigDecimal preco,
+                       @Min(100) int nrPaginas, @NotNull @Future LocalDate dataPublicacao,
                        @NotNull List<@NotNull @Valid AutorEntity> autores, @NotNull @Valid CategoriaEntity categoria) {
-
         this.livroIsbn = livroIsbn;
         this.titulo = titulo;
         this.resumo = resumo;
@@ -95,17 +99,21 @@ public class LivroEntity {
         return categoria;
     }
 
+    public List<PedidoItensEntity> getPedidoItens() {
+        return pedidoItens;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof LivroEntity)) return false;
         LivroEntity that = (LivroEntity) o;
-        return livroIsbn.equals(that.livroIsbn);
+        return titulo.equals(that.titulo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(livroIsbn);
+        return Objects.hash(titulo);
     }
 
     @Override

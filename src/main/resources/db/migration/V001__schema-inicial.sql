@@ -5,10 +5,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema casadocodigo
 -- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema casadocodigo
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `casadocodigo` DEFAULT CHARACTER SET utf8 ;
 USE `casadocodigo` ;
 

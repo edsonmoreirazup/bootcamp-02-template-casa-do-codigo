@@ -50,22 +50,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NegocioException.class)
     public ResponseEntity<?> handleDomain(NegocioException ex, WebRequest request) {
 
-        return restricaoDeNegocioNaoAtendidada(ex, request);
-    }
-
-    @ExceptionHandler(value = IllegalStateException.class)
-    public ResponseEntity<?> handleIllegalStateException(IllegalStateException ex, WebRequest request) {
-
-        return restricaoDeNegocioNaoAtendidada(ex, request);
-    }
-
-    @ExceptionHandler(value = IllegalArgumentException.class)
-    public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException ex, WebRequest request) {
-
-        return restricaoDeNegocioNaoAtendidada(ex, request);
-    }
-
-    private ResponseEntity<Object> restricaoDeNegocioNaoAtendidada(RuntimeException ex, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         TipoErro tipoErro = TipoErro.ERRO_NEGOCIO;
         String detail = ex.getMessage();

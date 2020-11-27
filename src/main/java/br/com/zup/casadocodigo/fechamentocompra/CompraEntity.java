@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.function.Function;
 
 @Entity
 @Table(name = "compra")
@@ -31,21 +30,25 @@ public class CompraEntity {
     private @NotBlank String telefone;
     private @NotBlank String cep;
     private @NotNull BigDecimal valorPago;
-    
+
     @OneToOne(mappedBy = "compra", cascade = CascadeType.PERSIST, optional = false)
-    private @NotNull @Valid PedidoEntity pedido;
+    private @NotNull @Valid
+    PedidoEntity pedido;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "cidade_id", nullable = false)
-    private @NotNull @Valid CidadeEntity cidade;
+    private @NotNull @Valid
+    CidadeEntity cidade;
+
     @Embedded
     private CupomAplicado cupomAplicado;
 
     @Deprecated
     public CompraEntity() {
+
     }
 
-    public CompraEntity(@NotBlank String cpfCnpj, @Email @NotBlank String email, @NotBlank String nome, @NotBlank String sobrenome, @NotBlank String endereco, @NotBlank String complemento, @NotBlank String telefone, @NotBlank String cep, @NotNull BigDecimal valorPago, Function<CompraEntity, PedidoEntity> funcaoCriacaoPedido, @NotNull @Valid CidadeEntity cidade) {
+    public CompraEntity(@NotBlank String cpfCnpj, @Email @NotBlank String email, @NotBlank String nome, @NotBlank String sobrenome, @NotBlank String endereco, @NotBlank String complemento, @NotBlank String telefone, @NotBlank String cep, @NotNull BigDecimal valorPago, @NotNull @Valid PedidoEntity pedido, @NotNull @Valid CidadeEntity cidade, CupomAplicado cupomAplicado) {
         this.cpfCnpj = cpfCnpj;
         this.email = email;
         this.nome = nome;
@@ -55,8 +58,9 @@ public class CompraEntity {
         this.telefone = telefone;
         this.cep = cep;
         this.valorPago = valorPago;
-        this.pedido = funcaoCriacaoPedido.apply(this);
+        this.pedido = pedido;
         this.cidade = cidade;
+        this.cupomAplicado = cupomAplicado;
     }
 
     public UUID getCompraId() {
@@ -148,5 +152,4 @@ public class CompraEntity {
                 ", cupomAplicado=" + cupomAplicado +
                 '}';
     }
-
 }

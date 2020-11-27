@@ -1,7 +1,5 @@
 package br.com.zup.casadocodigo.paisestadocidade;
 
-import br.com.zup.casadocodigo.fechamentocompra.CompraEntity;
-
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;

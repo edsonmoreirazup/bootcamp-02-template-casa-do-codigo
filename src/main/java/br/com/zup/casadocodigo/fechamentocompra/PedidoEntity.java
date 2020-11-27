@@ -1,49 +1,45 @@
 package br.com.zup.casadocodigo.fechamentocompra;
 
-import org.springframework.util.Assert;
-
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
+@Table(name = "pedido")
 public class PedidoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pedidoId;
+    private @NotNull long pedidoId;
+
     @OneToOne(optional = false)
+    @JoinColumn(name = "compra_id")
     private @NotNull @Valid CompraEntity compra;
 
-    @ElementCollection
-    private @Size(min = 1) Set<ItemPedido> itens = new HashSet<>();
+    @OneToMany(mappedBy = "pedido")
+    public List<PedidoItensEntity> pedidoItens;
 
     @Deprecated
     public PedidoEntity() {
+
     }
 
-    public PedidoEntity(@NotNull @Valid CompraEntity compra, @Size(min = 1) Set<ItemPedido> itens) {
-        Assert.isTrue(!itens.isEmpty(),
-                "todo pedido deve ter pelo menos um item");
+    public PedidoEntity(@NotNull @Valid CompraEntity compra, List<PedidoItensEntity> pedidoItens) {
         this.compra = compra;
-        this.itens.addAll(itens);
+        this.pedidoItens = pedidoItens;
     }
 
     public long getPedidoId() {
         return pedidoId;
     }
 
-    public boolean totalIgual(@Positive @NotNull BigDecimal total) {
-        BigDecimal totalPedido = itens.stream().map(ItemPedido::total).reduce(BigDecimal.ZERO,
-                BigDecimal::add);
+    public CompraEntity getCompra() {
+        return compra;
+    }
 
-        return totalPedido.doubleValue() == total.doubleValue();
+    public List<PedidoItensEntity> getPedidoItens() {
+        return pedidoItens;
     }
 
     @Override
@@ -62,7 +58,9 @@ public class PedidoEntity {
     @Override
     public String toString() {
         return "PedidoEntity{" +
-                "itens=" + itens +
+                "pedidoId=" + pedidoId +
+                ", compra=" + compra +
+                ", pedidoItens=" + pedidoItens +
                 '}';
     }
 }

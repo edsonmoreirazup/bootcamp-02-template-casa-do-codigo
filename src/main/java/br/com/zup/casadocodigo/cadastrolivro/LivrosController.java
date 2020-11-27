@@ -23,13 +23,13 @@ public class LivrosController {
 	private final LivroRepository livroRepository;
 	private final LivroResponseAssembler livroResponseAssembler;
 
-	//private final PagedResourcesAssembler<LivroEntity> pagedResourcesAssembler;
+	//private final PagedResourcesAssembler<LivroEntity_NEW> pagedResourcesAssembler;
 
 	private static final String LIVRO_NAO_ENCONTRADO_ID_MSG = "Não existe um cadastro de livro com código %s";
 
 	public LivrosController(EntityManager manager, LivroRepository livroRepository,
 			LivroResponseAssembler livroResponseAssembler/*,
-			PagedResourcesAssembler<LivroEntity> pagedResourcesAssembler*/) {
+			PagedResourcesAssembler<LivroEntity_NEW> pagedResourcesAssembler*/) {
 		this.manager = manager;
 		this.livroRepository = livroRepository;
 		this.livroResponseAssembler = livroResponseAssembler;

@@ -7,6 +7,7 @@ import br.com.zup.casadocodigo.compartilhado.UniqueValue;
 import br.com.zup.casadocodigo.novoautor.AutorEntity;
 import br.com.zup.casadocodigo.paisestadocidade.CidadeEntity;
 import br.com.zup.casadocodigo.paisestadocidade.EstadoEntity;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
@@ -26,6 +27,7 @@ public class CidadeRequest {
     @ExistsId(domainClass = EstadoEntity.class, fieldName = "id")
     private Long estadoId;
 
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public CidadeRequest(@NotBlank String nome, @NotNull Long estadoId) {
         this.nome = nome;
         this.estadoId = estadoId;

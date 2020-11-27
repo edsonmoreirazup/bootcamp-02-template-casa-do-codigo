@@ -5,6 +5,7 @@ import br.com.zup.casadocodigo.compartilhado.UniqueValue;
 import br.com.zup.casadocodigo.paisestadocidade.CidadeEntity;
 import br.com.zup.casadocodigo.paisestadocidade.EstadoEntity;
 import br.com.zup.casadocodigo.paisestadocidade.PaisEntity;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
@@ -21,6 +22,7 @@ public class EstadoRequest {
     @ExistsId(domainClass = PaisEntity.class, fieldName = "id")
     private Long paisId;
 
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public EstadoRequest(@NotBlank String nome, @NotNull @ExistsId(domainClass = PaisEntity.class, fieldName = "id") Long paisId) {
         this.nome = nome;
         this.paisId = paisId;

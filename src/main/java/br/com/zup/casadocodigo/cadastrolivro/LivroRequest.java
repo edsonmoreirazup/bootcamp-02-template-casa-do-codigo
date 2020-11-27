@@ -4,6 +4,7 @@ import br.com.zup.casadocodigo.cadastrocategoria.CategoriaEntity;
 import br.com.zup.casadocodigo.compartilhado.ExistsId;
 import br.com.zup.casadocodigo.compartilhado.UniqueValue;
 import br.com.zup.casadocodigo.novoautor.AutorEntity;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.util.Assert;
 
@@ -35,6 +36,7 @@ public class LivroRequest {
     private @NotNull @Size(min=1) List<@NotNull @ExistsId(domainClass = AutorEntity.class, fieldName = "id") Long> idAutores;
     private @NotNull Long idCategoria;
 
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public LivroRequest(@NotBlank String livroIsbn, @NotBlank String titulo, @NotBlank @Max(500) String resumo,
                         @NotBlank @Max(500) String sumario, @NotNull @Positive @Min(20) BigDecimal preco,
                         @NotNull @Positive @Min(100) int nrPaginas, @NotNull @Future LocalDate dataPublicacao,
